@@ -1,6 +1,26 @@
 server:
-  port : 9090
+  port: 9090
 
 spring:
-  application:
-    name: board
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/board?serverTimezone=Asia/Seoul
+    username: root
+    password: ssafy
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+    show-sql: true
+    open-in-view: false
+
+logging:
+  level:
+    com.board: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql: TRACE
