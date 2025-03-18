@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "arcihve_image")
+@Table(name = "archive_image")
 @Getter
 @Builder
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
