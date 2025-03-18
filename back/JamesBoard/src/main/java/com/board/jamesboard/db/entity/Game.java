@@ -6,11 +6,14 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Table(name = "game")
 @Entity
-public class game {
+public class Game {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,4 +61,14 @@ public class game {
 
     @Column(name = "game_difficulty")
     private Integer gameDifficulty;
+
+    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<GameCategory> gameCategories = new ArrayList<>();
+
+    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<GameDesigner> gameDesigners = new ArrayList<>();
+
+    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<GameTheme> gameThemes = new ArrayList<>();
+
 }
