@@ -21,6 +21,17 @@ pipeline {
         PATH = "${JAVA_HOME}/bin:${GRADLE_HOME}/bin:${env.PATH}"
     }
 
+    node {
+      stage('SCM') {
+        checkout scm
+      }
+      stage('SonarQube Analysis') {
+        withSonarQubeEnv() {
+          sh "./gradlew sonar"
+        }
+      }
+    }
+
     tools {
         jdk 'JDK 17'
         gradle 'Gradle 8.5'
