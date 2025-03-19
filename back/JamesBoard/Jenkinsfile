@@ -30,16 +30,31 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 echo 'Cloning the repository...'
-                git branch: 'develop',
+                git branch: 'feat/infra',
                     url: 'https://lab.ssafy.com/s12-bigdata-recom-sub1/S12P21D205.git',
                     credentialsId: 'GitLab-PAT'
             }
         }
+        stage('secret download'){
+            steps{
+                withCredentials([file(credentialsId: 'application-secret', variable: 'configFile')]){
+                    script{
+                        sh '''
+                            cp $configFile $WORKSPACE/back/JamesBoard/src/main/resources/application-dev.yaml
+
+                            echo "Copy successful!"
+                            ls -l $WORKSPACE/back/JamesBoard/src/main/resources/application-dev.yaml
+                        '''
+                    }
+                }
+            }
+        }
+
 
         stage('Build Application') {
             steps {
                 echo 'Building the application with Gradle Wrapper...'
-                dir('Hontail_Back') {
+                dir('back/JamesBoard') {
                     sh 'gradle clean build'
                     sh 'ls -al $(pwd)/build/libs'
                 }
@@ -90,9 +105,6 @@ pipeline {
                                       -p ${DOCKER_PORT}:${DOCKER_PORT} \
                                       -e SPRING_PROFILES_ACTIVE=dev \
                                       -e SERVER_PORT=${DOCKER_PORT} \
-                                      -e DB_URL=${DB_URL} \
-                                      -e DB_USERNAME=${DB_USERNAME} \
-                                      -e DB_PASSWORD=${DB_PASSWORD} \
                                       ${DOCKER_IMAGE}:latest
                                 """.stripIndent()
                             )
