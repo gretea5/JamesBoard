@@ -21,17 +21,6 @@ pipeline {
         PATH = "${JAVA_HOME}/bin:${GRADLE_HOME}/bin:${env.PATH}"
     }
 
-    node {
-      stage('SCM') {
-        checkout scm
-      }
-      stage('SonarQube Analysis') {
-        withSonarQubeEnv() {
-          sh "./gradlew sonar"
-        }
-      }
-    }
-
     tools {
         jdk 'JDK 17'
         gradle 'Gradle 8.5'
@@ -61,7 +50,6 @@ pipeline {
             }
         }
 
-
         stage('Build Application') {
             steps {
                 echo 'Building the application with Gradle Wrapper...'
@@ -71,6 +59,18 @@ pipeline {
                 }
             }
         }
+
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh """
+                        cd back/JamesBoard  # Gradle 프로젝트 폴더로 이동
+                        gradle sonar
+                    """
+                }
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 echo 'Building the Docker image...'
