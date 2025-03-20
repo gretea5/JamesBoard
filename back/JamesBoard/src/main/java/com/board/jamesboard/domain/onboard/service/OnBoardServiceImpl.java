@@ -1,22 +1,29 @@
 package com.board.jamesboard.domain.onboard.service;
 
 import com.board.jamesboard.db.entity.Game;
+import com.board.jamesboard.db.entity.User;
 import com.board.jamesboard.db.repository.GameCategoryRepository;
 import com.board.jamesboard.db.repository.GameRepository;
+import com.board.jamesboard.db.repository.UserRepository;
 import com.board.jamesboard.domain.onboard.dto.OnBoardResponseDto;
+import com.board.jamesboard.domain.onboard.dto.PreferGameRequestDto;
+import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor(onConstructor = @__(@Autowired))
+@Transactional
 public class OnBoardServiceImpl implements OnBoardService {
 
-    @Autowired
-    private GameCategoryRepository gameCategoryRepository;
+    private final GameCategoryRepository gameCategoryRepository;
 
-    @Autowired
-    private GameRepository gameRepository;
+    private final GameRepository gameRepository;
+
+    private final UserRepository userRepository;
 
     @Override
     public List<OnBoardResponseDto> getOnBoardGames(String category) {
@@ -29,11 +36,23 @@ public class OnBoardServiceImpl implements OnBoardService {
 
         List<Game> games = gameRepository.findAllById(gameIdList);
 
-
-        List<OnBoardResponseDto> result = games.stream()
+        return games.stream()
                 .map(game -> new OnBoardResponseDto(game.getGameId(), game.getGameTitle())) // DTO 변환
                 .toList();
+    }
 
-        return result;
+    @Override
+    public Long updateUserPreferGame(long userId, PreferGameRequestDto preferGameRequestDto) {
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        Game preferGame = gameRepository.findById(preferGameRequestDto.getGameId())
+                .orElseThrow(() -> new RuntimeException("Game not found"));
+
+        // 3. preferGame 변경 (setter 없이 새로운 객체 생성)
+        user.updatePreferGame(preferGame);
+
+        return user.getUserId();
     }
 }
