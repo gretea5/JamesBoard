@@ -7,13 +7,13 @@ import 'package:jamesboard/icons/ic_star.dart';
 
 import 'package:jamesboard/theme/Colors.dart';
 
-class CustomRatingBar extends StatelessWidget {
+class RatingBarBoardGameDetailReview extends StatelessWidget {
   final double initialRating;
   final int itemCount;
   final bool allowHalfRating;
   final ValueChanged<double>? onRatingUpdate;
 
-  const CustomRatingBar({
+  const RatingBarBoardGameDetailReview({
     super.key,
     required this.initialRating,
     this.itemCount = 5,
