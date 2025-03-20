@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jamesboard/feature/boardgame/widget/custom_rating_bar.dart';
+import 'package:jamesboard/feature/boardgame/widget/BottomSheetBoardGameDetailDetail.dart';
+import 'package:jamesboard/feature/boardgame/widget/RatingBarBoardGameDetailReview.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,12 +33,36 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  // int _counter = 0;
+  //
+  // void _incrementCounter() {
+  //   setState(() {
+  //     _counter++;
+  //   });
+  // }
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  void _showGameDetailBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        backgroundColor: Colors.transparent,
+        isScrollControlled: true,
+        builder: (context) => BottomSheetBoardGameDetailDetail(
+            gameTitle: '클루',
+            gameReleaseYear: 1997,
+            gameCategories: ['추리', '전략'],
+            gameThemes: ['카드게임', '경제', '유머'],
+            gameAverageRating: 3.7,
+            gameDifficulty: 1,
+            gameAge: 15,
+            gameMinPlayer: 3,
+            gameMaxPlayer: 6,
+            gamePlayTime: 100,
+            gameDescription:
+                '클루에 대한 설명입니다. 클루에 대한 설명입니다. 클루에 대한 설명입니다. 클루에 대한 설명입니다. 클루에 대한 설명입니다. 클루에 대한 설명입니다. '
+                '클루에 대한 설명입니다. 클루에 대한 설명입니다. 클루에 대한 설명입니다. 클루에 대한 설명입니다. 클루에 대한 설명입니다. '
+                '클루에 대한 설명입니다. 클루에 대한 설명입니다. 클루에 대한 설명입니다. 클루에 대한 설명입니다. 클루에 대한 설명입니다.',
+            gamePublisher: 'Roxley',
+            gameDesigners: ['Gavan Brown', 'Matt Tolman']));
   }
 
   @override
@@ -55,20 +80,14 @@ class _MyHomePageState extends State<MyHomePage> {
               'You have pushed the button this many times:',
             ),
             Text(
-              '$_counter',
+              '_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            CustomRatingBar(
-              initialRating: 0.0,
-              onRatingUpdate: (rating) {
-                print('Rating: $rating');
-              },
-            )
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () => _showGameDetailBottomSheet(context),
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
