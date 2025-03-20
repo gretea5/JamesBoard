@@ -6,6 +6,10 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -34,6 +38,15 @@ public class User {
 
     @Column(name = "user_nickname")
     private String userNickname;
+
+    @OneToMany(mappedBy = "user")
+    private List<Archive> archives = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Recommend> recommends = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<UserActivity> userActivities = new ArrayList<>();
 
 
     @Builder
