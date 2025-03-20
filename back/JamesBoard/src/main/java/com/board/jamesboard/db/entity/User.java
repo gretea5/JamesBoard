@@ -45,9 +45,6 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Recommend> recommends = new ArrayList<>();
 
-    @OneToOne(mappedBy = "user")
-    private RefreshToken refreshToken;
-
     @OneToMany(mappedBy = "user")
     private List<UserActivity> userActivities = new ArrayList<>();
 

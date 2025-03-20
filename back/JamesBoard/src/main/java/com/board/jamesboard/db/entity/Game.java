@@ -90,7 +90,4 @@ public class Game {
 
     @OneToMany(mappedBy = "game")
     private List<UserActivity> userActivities = new ArrayList<>();
-
-    @OneToOne(mappedBy = "preferGame")
-    private User user;
 }
