@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:jamesboard/theme/Colors.dart';
 
 class EditBoxRegisterMissionBoardGameCount extends StatefulWidget {
@@ -40,6 +41,11 @@ class _CustomInputBoxState extends State<EditBoxRegisterMissionBoardGameCount> {
       child: TextField(
         controller: _controller,
         keyboardType: TextInputType.number,
+        inputFormatters: [
+          FilteringTextInputFormatter.digitsOnly,
+          LengthLimitingTextInputFormatter(1),
+          _MaxValueInputFormatter(9)
+        ],
         style: TextStyle(
           color: _hasInput ? mainWhite : mainGrey,
           fontSize: 16,
@@ -54,5 +60,24 @@ class _CustomInputBoxState extends State<EditBoxRegisterMissionBoardGameCount> {
             contentPadding: EdgeInsets.zero),
       ),
     );
+  }
+}
+
+class _MaxValueInputFormatter extends TextInputFormatter {
+  final int maxValue;
+
+  _MaxValueInputFormatter(this.maxValue);
+
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    if (newValue.text.isEmpty) return newValue;
+
+    final int? value = int.tryParse(newValue.text);
+    if (value == null || value > maxValue) {
+      return oldValue;
+    }
+
+    return newValue;
   }
 }
