@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 
 import '../../../theme/Colors.dart';
 
-class ImageItem extends StatelessWidget {
+class ImageItemRegisterMission extends StatelessWidget {
   final String imageUrl;
 
-  const ImageItem({super.key, required this.imageUrl});
+  const ImageItemRegisterMission({super.key, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
