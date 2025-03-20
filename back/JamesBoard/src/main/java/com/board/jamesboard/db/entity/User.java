@@ -2,13 +2,14 @@ package com.board.jamesboard.db.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.sql.Timestamp;
 import java.time.Instant;
 
 @Entity
 @Table(name = "users")
 @Getter
-@Builder
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
@@ -27,12 +28,25 @@ public class User {
     @Column(name = "user_profile")
     private String userProfile;
 
-    @Column(name = "created_at")
-    private Instant createdAt;
+    @CreationTimestamp
+    @Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private Timestamp createdAt;
 
     @Column(name = "user_nickname")
     private String userNickname;
 
 
+    @Builder
+    public User(String loginId, String userProfile, String userNickname, Game preferGame) {
+        this.loginId = loginId;
+        this.userProfile = userProfile;
+        this.userNickname = userNickname;
+        this.preferGame = preferGame;
+        this.createdAt = Timestamp.from(Instant.now());
+    }
 
+    // 유저의 선호게임 변경
+    public void updatePreferGame(Game preferGame) {
+        this.preferGame = preferGame;
+    }
 }
