@@ -29,7 +29,7 @@ public class OnBoardServiceImpl implements OnBoardService {
     public List<OnBoardResponseDto> getOnBoardGames(String category) {
 
         // Category 입력 받아서 게임ID 조회
-        List<Long> gameIdList = gameCategoryRepository.findTop30ByGameCategoryName(category)
+        List<Long> gameIdList = gameCategoryRepository.findByGameCategoryName(category)
                 .stream()
                 .map(gameCategory -> gameCategory.getGame().getGameId()) // Game 객체에서 ID 추출
                 .toList();

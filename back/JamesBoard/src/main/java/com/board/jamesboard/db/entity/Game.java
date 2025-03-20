@@ -7,7 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -71,4 +73,24 @@ public class Game {
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<GameTheme> gameThemes = new ArrayList<>();
 
+    @Column(name = "game_rank")
+    private Integer gameRank;
+
+    @Column(name = "game_avg_rating")
+    private Float gameAvgRating;
+
+    @Column(name = "game_review_count")
+    private Integer gameReviewCount;
+
+    @OneToMany(mappedBy = "game")
+    private List<Archive> archives = new ArrayList<>();
+
+    @OneToMany(mappedBy = "game")
+    private List<Recommend> recommends = new ArrayList<>();
+
+    @OneToMany(mappedBy = "game")
+    private List<UserActivity> userActivities = new ArrayList<>();
+
+    @OneToOne(mappedBy = "preferGame")
+    private User user;
 }
