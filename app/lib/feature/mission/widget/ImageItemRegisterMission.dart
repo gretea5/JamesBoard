@@ -13,10 +13,15 @@ class ImageItemRegisterMission extends StatelessWidget {
       builder: (context, constraints) {
         double size = (constraints.maxWidth - 16) / 2;
 
-        return Image.asset(
-          imageUrl,
+        return Container(
           width: size * 0.3,
           height: size * 0.3,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              image: DecorationImage(
+                image: AssetImage(imageUrl),
+                fit: BoxFit.cover,
+              )),
         );
       },
     );
