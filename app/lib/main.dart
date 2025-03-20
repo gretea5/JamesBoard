@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jamesboard/feature/boardgame/widget/BottomSheetBoardGameDetailDetail.dart';
 import 'package:jamesboard/feature/boardgame/widget/RatingBarBoardGameDetailReview.dart';
+import 'package:jamesboard/feature/boardgame/widget/RatingBoardGameDetail.dart';
 
 void main() {
   runApp(const MyApp());
@@ -83,6 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
               '_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
+            RatingBoardGameDetail(rating: 3.7),
           ],
         ),
       ),
