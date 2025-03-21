@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:jamesboard/feature/mission/widget/DialogMissionDetailDelete.dart';
 import 'package:jamesboard/theme/Colors.dart';
 
 class ProfileMissionDetail extends StatelessWidget {
@@ -49,6 +50,11 @@ class ProfileMissionDetail extends StatelessWidget {
   }
 
   void _onMorePressed(BuildContext context) {
+    // 다이얼로그 메인 메시지
+    final String mainMessage = '해당 보고를 삭제하실 건가요?';
+    // 다이얼로그 서브 메시지
+    final String subMessage = '한 번 삭제하시면 되돌릴 수 없습니다.';
+
     showModalBottomSheet(
       context: context,
       builder: (context) {
@@ -96,7 +102,14 @@ class ProfileMissionDetail extends StatelessWidget {
               Container(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () => Navigator.of(context).pop(),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+
+                    Future.delayed(const Duration(milliseconds: 100), () {
+                      showDialogMissionDetailDelete(
+                          context, mainMessage, subMessage);
+                    });
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: secondaryBlack,
                     padding: const EdgeInsets.symmetric(vertical: 24),
