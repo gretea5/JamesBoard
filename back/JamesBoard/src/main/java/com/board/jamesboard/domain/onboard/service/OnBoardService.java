@@ -6,7 +6,7 @@ import com.board.jamesboard.domain.onboard.dto.PreferGameRequestDto;
 import java.util.List;
 
 public interface OnBoardService {
-    public List<OnBoardResponseDto> getOnBoardGames(String category);
+    List<OnBoardResponseDto> getOnBoardGames(String category);
 
-    public Long updateUserPreferGame(long userId, PreferGameRequestDto preferGameRequestDto);
+    Long updateUserPreferGame(long userId, PreferGameRequestDto preferGameRequestDto);
 }
