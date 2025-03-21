@@ -34,7 +34,7 @@ public class SwaggerConfig {
                 .addSecurityItem(securityRequirement)
                 .components(new Components().addSecuritySchemes("bearer-jwt", securityScheme))
                 .servers(List.of(
-                        new Server().url("http://localhost:9090"),
+                        new Server().url("http://localhost:8080"),
                         new Server().url("https://j12d205.p.ssafy.io").description("제임스보드 API 서버")
                 ));
     }
