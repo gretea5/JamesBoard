@@ -5,5 +5,5 @@ import com.board.jamesboard.domain.archive.dto.ArchiveResponseDto;
 import java.util.List;
 
 public interface ArchiveService {
-    List<ArchiveResponseDto> getArchives();
+    List<ArchiveResponseDto> getArchivesImage();
 }
