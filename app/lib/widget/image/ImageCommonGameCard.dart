@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class GameImageCard extends StatelessWidget {
+class ImageCommonGameCard extends StatelessWidget {
   final String imageUrl;
 
-  const GameImageCard({
+  const ImageCommonGameCard({
     super.key,
     required this.imageUrl
   });

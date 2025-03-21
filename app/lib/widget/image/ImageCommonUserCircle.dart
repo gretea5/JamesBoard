@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class UserCommonCircleImage extends StatelessWidget {
+class ImageCommonUserCircle extends StatelessWidget {
   final String imageUrl;
-  const UserCommonCircleImage({super.key, required this.imageUrl});
+  const ImageCommonUserCircle({super.key, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
