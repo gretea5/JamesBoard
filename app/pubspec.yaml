@@ -41,6 +41,9 @@ dependencies:
   # rating bar
   flutter_rating_bar: ^4.0.1
 
+  # logger:
+  logger: ^2.5.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

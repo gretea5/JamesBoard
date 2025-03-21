@@ -2,6 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:jamesboard/feature/boardgame/widget/BottomSheetBoardGameDetailDetail.dart';
 import 'package:jamesboard/feature/boardgame/widget/RatingBarBoardGameDetailReview.dart';
 import 'package:jamesboard/feature/boardgame/widget/RatingBoardGameDetail.dart';
+import 'package:logger/logger.dart';
+
+final logger = Logger(
+    printer: PrettyPrinter(
+  colors: true,
+  printEmojis: true,
+  printTime: true,
+));
 
 void main() {
   runApp(const MyApp());
