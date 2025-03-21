@@ -47,7 +47,9 @@ public class SecurityConfig {
                     CorsConfiguration config = new CorsConfiguration();
                     config.setAllowedOriginPatterns(List.of(
                             "http://localhost:8000",
-                            "http://localhost:8080"
+                            "http://localhost:8080",
+                            "http://j12d205.p.ssafy.io:9090",
+                            "https://j12d205.p.ssafy.io"
                     ));
                     config.setAllowedMethods(Collections.singletonList("*"));
                     config.setAllowedHeaders(Collections.singletonList("*"));
@@ -60,15 +62,15 @@ public class SecurityConfig {
             .csrf(AbstractHttpConfigurer::disable)
             //경로별 접근권한
             .authorizeHttpRequests((requests) -> requests
-                    //인증관련
                     .requestMatchers("/login/oauth2/code/**").permitAll()
                     .requestMatchers("/login/oauth2/error").permitAll()
                     .requestMatchers("/api/auth/**").permitAll()
                     .requestMatchers("/error").permitAll()
-                    // Swagger UI
-                    .requestMatchers("/swagger-ui/**").permitAll()
+                    // Swagger UI - 더 정확한 경로 지정
+                    .requestMatchers("/swagger-ui/**", "/swagger-ui.html").permitAll()
                     .requestMatchers("/swagger-resources/**").permitAll()
-                    .requestMatchers("/v3/api-docs/**").permitAll()
+                    .requestMatchers("/v3/api-docs", "/v3/api-docs/**").permitAll() // 정확한 경로 추가
+                    .requestMatchers("/webjars/**").permitAll() // 웹자 리소스도 추가
                     // 나머지 비허용
                     .anyRequest().authenticated())
             .addFilterBefore(new JWTFilter(jwtUtil, refreshTokenService), UsernamePasswordAuthenticationFilter.class);

@@ -140,7 +140,11 @@ public class JWTFilter extends OncePerRequestFilter {
         }
         // 제외 경로
         return path.startsWith("/api/auth/") ||
-                path.startsWith("/swagger-ui/")||
+                path.startsWith("/swagger-ui/") ||
+                path.startsWith("/v3/api-docs") ||
+                path.equals("/v3/api-docs") ||
+                path.startsWith("/swagger-resources/") ||
+                path.startsWith("/webjars/") ||
                 path.startsWith("/login/oauth2/code/");
     }
 
