@@ -26,7 +26,7 @@ spring:
           kakao:
             client-id: ${KAKAO_CLIENT_ID}
             client-secret: ${KAKAO_CLIENT_SECRET}
-            redirect-uri: ${OAUTH_REDIRECT_URI}
+            redirect-uri: http://localhost:8080/login/oauth2/code/kakao
             authorization-grant-type: authorization_code
             client-authentication-method: client_secret_post
             client-name: Kakao
@@ -48,7 +48,7 @@ logging:
     org.hibernate.type.descriptor.sql: TRACE
 
 jwt:
-  secret: s8dF4jKl2mP9qR7tZ5xV3wY1bN6cA0uE
+  secret: ${JWT_SECRET}
   expiration:
     access: 3600000 #1시간
     refresh: 604800000
