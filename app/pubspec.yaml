@@ -64,7 +64,6 @@ flutter:
   #이미지
   assets:
     - assets/image/
-    - assets/icons/
 
   # 폰트
   fonts:
