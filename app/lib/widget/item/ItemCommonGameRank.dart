@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:jamesboard/theme/Colors.dart';
 
-class TileGameRank extends StatelessWidget {
-  const TileGameRank({super.key});
+class ItemCommonGameRank extends StatelessWidget {
+  const ItemCommonGameRank({super.key});
 
   @override
   Widget build(BuildContext context) {

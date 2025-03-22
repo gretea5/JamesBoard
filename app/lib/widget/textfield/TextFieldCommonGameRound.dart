@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:jamesboard/theme/Colors.dart';
 
-class GameRoundTextField extends StatelessWidget {
+class TextFieldCommonGameRound extends StatelessWidget {
   final TextEditingController controller;
 
-  const GameRoundTextField({
+  const TextFieldCommonGameRound({
     Key? key,
     required this.controller,
   }) : super(key: key);

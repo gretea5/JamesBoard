@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:jamesboard/theme/Colors.dart';
 
-class TitleCommonSearchBar extends StatelessWidget {
-  const TitleCommonSearchBar({super.key});
+class SearchBarCommonTitle extends StatelessWidget {
+  const SearchBarCommonTitle({super.key});
 
   @override
   Widget build(BuildContext context) {
