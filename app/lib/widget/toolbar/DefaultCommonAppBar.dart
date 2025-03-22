@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:jamesboard/theme/Colors.dart';
 
-class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
+class DefaultCommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
 
-  const CommonAppBar({Key? key, required this.title}) : super(key: key);
+  const DefaultCommonAppBar({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
