@@ -32,13 +32,12 @@ class _CardHomeTopTenState extends State<CardHomeTopTen> {
               return GestureDetector(
                 onTap: () => widget.onImageTap(id),
                 child: Container(
-                  width: width + 45 , // 숫자 공간 추가
-                  margin: const EdgeInsets.symmetric(horizontal: 10), // 아이템 간격 추가
+                  width: width * 1.33 , // 숫자 공간 추가
+                  margin: const EdgeInsets.symmetric(horizontal: 20), // 아이템 간격 추가
                   child: Row(
                     children: [
-                      // 순번 표시 (index + 1)
                       Container(
-                        width: 45, // 숫자 너비 조정
+                        width: width * 0.33, // 숫자 너비 조정
                         alignment: Alignment.center,
                         child: Stack(
                           children: [
@@ -46,7 +45,7 @@ class _CardHomeTopTenState extends State<CardHomeTopTen> {
                             Text(
                               '${index + 1}',
                               style: TextStyle(
-                                fontSize: height * 4 / 5,
+                                fontSize: height * 9 / 10,
                                 fontFamily: 'PretendardBold',
                                 foreground: Paint()
                                   ..style = PaintingStyle.stroke
@@ -58,7 +57,7 @@ class _CardHomeTopTenState extends State<CardHomeTopTen> {
                             Text(
                               '${index + 1}',
                               style: TextStyle(
-                                fontSize: height * 4 / 5,
+                                fontSize: height * 9 / 10,
                                 fontFamily: 'PretendardBold',
                                 color: mainRed, // 내부 색상
                               ),
