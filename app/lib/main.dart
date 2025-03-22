@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:jamesboard/feature/boardgame/widget/BottomSheetBoardGameDetailDetail.dart';
 import 'package:logger/logger.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:jamesboard/theme/Colors.dart';
 
 final logger = Logger(
     printer: PrettyPrinter(
@@ -39,6 +41,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final List<String> items = List.generate(20, (index) => 'Item $index');
 
   void _showGameDetailBottomSheet(BuildContext context) {
     showModalBottomSheet(
@@ -72,7 +75,69 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        
+
+      ),
+      backgroundColor: Colors.black, // 배경색 검정으로 설정
+      bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: secondaryBlack,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          selectedItemColor: mainWhite,
+          unselectedItemColor: mainWhite,
+          type: BottomNavigationBarType.fixed,
+          items: [
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset('assets/icons/icon_home_unselected.svg',
+                width: 24,
+                height: 24,
+                colorFilter: ColorFilter.mode(mainWhite, BlendMode.srcIn)),
+              activeIcon: SvgPicture.asset('assets/icons/icon_home_selected.svg',
+                width: 24,
+                height: 24,
+                colorFilter: ColorFilter.mode(mainWhite, BlendMode.srcIn)),
+              label: 'home',
+            ),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset('assets/icons/icon_recommend_unselected.svg',
+                  width: 24,
+                  height: 24,
+                  colorFilter: ColorFilter.mode(mainWhite, BlendMode.srcIn)),
+              activeIcon: SvgPicture.asset('assets/icons/icon_recommend_selected.svg',
+                  width: 24,
+                  height: 24,
+                  colorFilter: ColorFilter.mode(mainWhite, BlendMode.srcIn)),
+              label: 'recommend',
+            ),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset('assets/icons/icon_register_unselected.svg',
+                  width: 24,
+                  height: 24,
+                  colorFilter: ColorFilter.mode(mainWhite, BlendMode.srcIn)),
+              label: 'search',
+            ),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset('assets/icons/icon_archive_unselected.svg',
+                  width: 24,
+                  height: 24,
+                  colorFilter: ColorFilter.mode(mainWhite, BlendMode.srcIn)),
+              activeIcon: SvgPicture.asset('assets/icons/icon_archive_selected.svg',
+                  width: 24,
+                  height: 24,
+                  colorFilter: ColorFilter.mode(mainWhite, BlendMode.srcIn)),
+              label: 'recommend',
+            ),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset('assets/icons/icon_mypage_unselected.svg',
+                  width: 24,
+                  height: 24,
+                  colorFilter: ColorFilter.mode(mainWhite, BlendMode.srcIn)),
+              activeIcon: SvgPicture.asset('assets/icons/icon_mypage_selected.svg',
+                  width: 24,
+                  height: 24,
+                  colorFilter: ColorFilter.mode(mainWhite, BlendMode.srcIn)),
+              label: 'mypage',
+            ),
+          ]
       ),
     );
   }
