@@ -15,10 +15,15 @@ class DialogMissionDetailDelete extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: mainBlack,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      backgroundColor: secondaryBlack,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+          side: BorderSide(
+            color: mainGold,
+            width: 1,
+          )),
       child: Container(
-        width: MediaQuery.of(context).size.width - 40,
+        width: MediaQuery.of(context).size.width * 0.90,
         padding: const EdgeInsets.all(32),
         child: Column(
           mainAxisSize: MainAxisSize.min,
