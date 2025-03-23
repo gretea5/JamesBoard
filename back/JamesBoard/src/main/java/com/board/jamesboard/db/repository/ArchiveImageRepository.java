@@ -8,5 +8,7 @@ import java.util.Collection;
 import java.util.List;
 
 public interface ArchiveImageRepository extends JpaRepository<ArchiveImage, Long> {
-        List<ArchiveImage> findAllByArchiveIn(List<Archive> archive);
+    List<ArchiveImage> findAllByArchiveIn(List<Archive> archive);
+
+    List<ArchiveImage> findByArchive(Archive archive);
 }

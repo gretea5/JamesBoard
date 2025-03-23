@@ -2,9 +2,14 @@ package com.board.jamesboard.domain.archive.service;
 
 import com.board.jamesboard.db.entity.Archive;
 import com.board.jamesboard.db.entity.ArchiveImage;
+import com.board.jamesboard.db.entity.Game;
+import com.board.jamesboard.db.entity.User;
 import com.board.jamesboard.db.repository.ArchiveImageRepository;
 import com.board.jamesboard.db.repository.ArchiveRepository;
+import com.board.jamesboard.domain.archive.dto.ArchiveDetailResponseDto;
+import com.board.jamesboard.domain.archive.dto.ArchiveImageDto;
 import com.board.jamesboard.domain.archive.dto.ArchiveResponseDto;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -14,6 +19,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 @AllArgsConstructor
 @Slf4j
 public class ArchiveServiceImpl implements ArchiveService {
@@ -48,6 +54,43 @@ public class ArchiveServiceImpl implements ArchiveService {
                     );
                 })
                 .toList();
+    }
+
+    @Override
+    public ArchiveDetailResponseDto getArchiveDetail(Long archiveId) {
+
+        Archive archive = archiveRepository.findById(archiveId)
+                .orElseThrow(() -> new RuntimeException("Archive not found"));
+
+        List<ArchiveImage> archiveImageList = archiveImageRepository.findByArchive(archive);
+
+        User createUser = archive.getUser();
+        Game playedGame = archive.getGame();
+
+        log.debug("Archive userId: {}",
+                createUser.getUserId());
+
+        log.debug("Archive image list: {}",
+                archiveImageList.stream()
+                        .map(img -> "[id=" + img.getArchiveImageId() + ", url=" + img.getArchiveImageUrl() + "]")
+                        .toList()
+        );
+
+        // 이미지 리스트 DTO 변환
+        List<ArchiveImageDto> archiveImageDtoList = archiveImageList.stream()
+                .map(img -> new ArchiveImageDto(img.getArchiveImageUrl()))
+                .toList();
+
+        return new ArchiveDetailResponseDto(
+                archive.getArchiveId(),
+                createUser.getUserNickname(),
+                createUser.getUserProfile(),
+                archive.getArchiveContent(),
+                playedGame.getGameTitle(),
+                archive.getArchiveGamePlayTime(),
+                archiveImageDtoList
+        );
+
     }
 
 }

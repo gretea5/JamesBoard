@@ -1,14 +1,12 @@
 package com.board.jamesboard.domain.archive.controller;
 
+import com.board.jamesboard.domain.archive.dto.ArchiveDetailResponseDto;
 import com.board.jamesboard.domain.archive.dto.ArchiveResponseDto;
 import com.board.jamesboard.domain.archive.service.ArchiveService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,5 +21,11 @@ public class ArchiveController {
     @Operation(summary = "아카이브 전체조회(아이디와 첫번째 이미지)")
     public ResponseEntity<List<ArchiveResponseDto>> getAllArchives() {
         return ResponseEntity.ok(archiveService.getArchivesImage());
+    }
+
+    @GetMapping("/{archiveId}")
+    @Operation(summary = "아카이브 상세 조회")
+    public ResponseEntity<ArchiveDetailResponseDto> getArchive(@PathVariable Long archiveId) {
+        return ResponseEntity.ok(archiveService.getArchiveDetail(archiveId));
     }
 }

@@ -32,8 +32,8 @@ public class Archive {
     @Column(name = "archive_content")
     private String archiveContent;
 
-    @Column(name = "archive_game_play_count")
-    private Integer archiveGamePlayCount;
+    @Column(name = "archive_game_play_time")
+    private Integer archiveGamePlayTime;
 
     @Column(name = "created_at")
     private Instant createdAt;
