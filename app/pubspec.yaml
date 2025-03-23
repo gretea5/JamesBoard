@@ -21,6 +21,9 @@ dependencies:
   # logger:
   logger: ^2.5.0
 
+  #flutter_charts
+  syncfusion_flutter_charts: ^28.2.12
+
 
 dev_dependencies:
   flutter_test:
