@@ -34,7 +34,7 @@ class _ItemUserGenrePercentInfoState extends State<ItemUserGenrePercentInfo> {
         title: Text(
           widget.genre,
           style: TextStyle(
-              fontSize: 16,
+              fontSize: 20 ,
               fontFamily: 'PretendardSemiBold',
               color: mainWhite
           ),
@@ -42,7 +42,7 @@ class _ItemUserGenrePercentInfoState extends State<ItemUserGenrePercentInfo> {
         trailing: Text(
           "${widget.percent}%",
           style: TextStyle(
-              fontSize: 16,
+              fontSize: 20,
               fontFamily: 'PretendardSemiBold',
               color: mainWhite
           ),
