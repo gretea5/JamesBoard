@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:jamesboard/widget/toolbar/DefaultCommonAppBar.dart';
 import 'package:logger/logger.dart';
 import 'package:flutter_svg/svg.dart';
@@ -12,7 +13,17 @@ final logger = Logger(
 ));
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // 앱 전체에서 세로 모드만 허용
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]).then((_) {
+    runApp(MyApp());
+  });
+
+  // runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
