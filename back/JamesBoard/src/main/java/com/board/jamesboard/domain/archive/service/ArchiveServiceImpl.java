@@ -1,19 +1,19 @@
 package com.board.jamesboard.domain.archive.service;
 
-import com.board.jamesboard.db.entity.Archive;
-import com.board.jamesboard.db.entity.ArchiveImage;
-import com.board.jamesboard.db.entity.Game;
-import com.board.jamesboard.db.entity.User;
-import com.board.jamesboard.db.repository.ArchiveImageRepository;
-import com.board.jamesboard.db.repository.ArchiveRepository;
+import com.board.jamesboard.db.entity.*;
+import com.board.jamesboard.db.repository.*;
 import com.board.jamesboard.domain.archive.dto.ArchiveDetailResponseDto;
 import com.board.jamesboard.domain.archive.dto.ArchiveImageDto;
+import com.board.jamesboard.domain.archive.dto.ArchiveRequestDto;
 import com.board.jamesboard.domain.archive.dto.ArchiveResponseDto;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -26,6 +26,9 @@ public class ArchiveServiceImpl implements ArchiveService {
 
     private final ArchiveRepository archiveRepository;
     private final ArchiveImageRepository archiveImageRepository;
+    private final UserRepository userRepository;
+    private final GameRepository gameRepository;
+    private final UserActivityRepository userActivityRepository;
 
     @Override
     public List<ArchiveResponseDto> getArchivesImage() {
@@ -91,6 +94,70 @@ public class ArchiveServiceImpl implements ArchiveService {
                 archiveImageDtoList
         );
 
+    }
+
+    @Override
+    public Long createArchive(ArchiveRequestDto archiveRequestDto) {
+
+        // JWT 현재 userId 가져오기
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        Long userId = Long.parseLong(authentication.getName());
+
+        Game game = gameRepository.findById(archiveRequestDto.getGameId())
+                .orElseThrow(() -> new RuntimeException("해당 게임이 존재하지 않습니다."));
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("해당 유저가 존재하지 않습니다."));
+
+        Archive archive = Archive.builder()
+                .archiveContent(archiveRequestDto.getArchiveContent())
+                .archiveGamePlayTime(archiveRequestDto.getArchiveGamePlayTime())
+                .archiveGamePlayCount(archiveRequestDto.getArchiveGamePlayCount())
+                .game(game)
+                .user(user)
+                .build();
+
+
+        List<ArchiveImageDto> archiveImageList = archiveRequestDto.getArchiveImageList();
+
+        List<ArchiveImage> archiveImages = archiveImageList.stream()
+                .map(dto -> ArchiveImage.builder()
+                        .archiveImageUrl(dto.getArchiveImageUrl())
+                        .archive(archive)
+                        .build())
+                .toList();
+
+        archiveImageRepository.saveAll(archiveImages);
+
+        Archive savedArchive = archiveRepository.save(archive);
+
+        int playTime = archive.getArchiveGamePlayTime();
+        Instant now = Instant.now();
+
+        userActivityRepository.findByUserAndGame(user, game)
+                .ifPresentOrElse(
+                        existing -> {
+                            UserActivity updated = existing.toBuilder()
+                                    .userActivityTime(existing.getUserActivityTime() + playTime)
+                                    .modifiedAt(now)
+                                    .build();
+                            userActivityRepository.save(updated);
+                        },
+                        () -> {
+                            UserActivity newActivity = UserActivity.builder()
+                                    .user(user)
+                                    .game(game)
+                                    .userActivityTime(playTime)
+                                    .userActivityRating(null)
+                                    .createdAt(now)
+                                    .modifiedAt(now)
+                                    .build();
+                            userActivityRepository.save(newActivity);
+                        }
+                );
+
+        return savedArchive.getArchiveId();
     }
 
 }

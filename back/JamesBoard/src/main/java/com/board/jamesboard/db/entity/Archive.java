@@ -3,8 +3,11 @@ package com.board.jamesboard.db.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.Instant;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,11 +38,16 @@ public class Archive {
     @Column(name = "archive_game_play_time")
     private Integer archiveGamePlayTime;
 
+    @Column(name = "archive_game_play_count")
+    private Integer archiveGamePlayCount;
+
+    @ColumnDefault("CURRENT_TIMESTAMP")
+    @CreationTimestamp
     @Column(name = "created_at")
-    private Instant createdAt;
+    private LocalDateTime createdAt;
 
     @Column(name = "is_deleted")
-    private Byte isDeleted;
+    private boolean isDeleted = false;
 
     //Archive 삭제시 image도 삭제되어야한다.
     @OneToMany(mappedBy = "archive", cascade = CascadeType.ALL, orphanRemoval = true)
