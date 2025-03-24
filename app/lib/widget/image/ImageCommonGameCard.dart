@@ -16,7 +16,7 @@ class ImageCommonGameCard extends StatelessWidget {
         double height = width * (4 / 3); // 3:4 비율 적용
 
         return ClipRRect(
-          borderRadius: BorderRadius.circular(4.0),
+          borderRadius: BorderRadius.circular(10.0),
           child: Image.asset(
             imageUrl,
             width: width,
