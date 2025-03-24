@@ -311,7 +311,7 @@ class _MissionEditState extends State<MissionEdit> {
                         ),
                       ),
                       Text(
-                        '100자까지 입력 가능합니다.',
+                        '255자까지 입력 가능합니다.',
                         style: TextStyle(
                           color: mainGrey,
                           fontSize: 14,
