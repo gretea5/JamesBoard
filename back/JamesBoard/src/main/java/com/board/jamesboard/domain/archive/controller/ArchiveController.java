@@ -1,6 +1,7 @@
 package com.board.jamesboard.domain.archive.controller;
 
 import com.board.jamesboard.domain.archive.dto.ArchiveDetailResponseDto;
+import com.board.jamesboard.domain.archive.dto.ArchiveRequestDto;
 import com.board.jamesboard.domain.archive.dto.ArchiveResponseDto;
 import com.board.jamesboard.domain.archive.service.ArchiveService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,5 +28,11 @@ public class ArchiveController {
     @Operation(summary = "아카이브 상세 조회")
     public ResponseEntity<ArchiveDetailResponseDto> getArchive(@PathVariable Long archiveId) {
         return ResponseEntity.ok(archiveService.getArchiveDetail(archiveId));
+    }
+
+    @PostMapping("")
+    @Operation(summary = "아카이브 추가, 추가 시 UserActivity 테이블 갱신")
+    public ResponseEntity<Long> getArchiveTest(@RequestBody ArchiveRequestDto archiveRequestDto) {
+        return ResponseEntity.ok(archiveService.createArchive(archiveRequestDto));
     }
 }

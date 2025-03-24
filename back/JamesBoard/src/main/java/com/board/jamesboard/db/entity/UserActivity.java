@@ -8,7 +8,7 @@ import java.time.Instant;
 @Entity
 @Table(name = "user_activity")
 @Getter
-@Builder
+@Builder(toBuilder = true)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserActivity {
