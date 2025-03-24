@@ -1,4 +1,4 @@
-package com.board.jamesboard.domain.auth;
+package com.board.jamesboard.domain.auth.controller;
 
 import com.board.jamesboard.domain.auth.dto.RefreshTokenResponseDto;
 import com.board.jamesboard.domain.auth.service.AuthService;
