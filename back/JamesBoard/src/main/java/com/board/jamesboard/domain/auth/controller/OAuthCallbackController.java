@@ -1,4 +1,4 @@
-package com.board.jamesboard.domain.auth;
+package com.board.jamesboard.domain.auth.controller;
 
 import com.board.jamesboard.core.constant.ErrorCode;
 import com.board.jamesboard.core.error.ErrorResponse;
