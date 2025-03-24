@@ -16,7 +16,7 @@ class TextFieldCommonGameRound extends StatelessWidget {
       controller: controller,
       keyboardType: TextInputType.number,
       inputFormatters: [FilteringTextInputFormatter.digitsOnly], // 숫자만 입력 가능
-      style: TextStyle(color: Colors.white),
+      style: TextStyle(color: mainWhite),
       decoration: InputDecoration(
         hintStyle: TextStyle(
           color: mainGrey
