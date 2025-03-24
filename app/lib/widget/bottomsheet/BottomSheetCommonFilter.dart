@@ -64,15 +64,23 @@ class _BottomSheetCommonFilterState extends State<BottomSheetCommonFilter> {
             onTap: () => Navigator.pop(context),
             behavior: HitTestBehavior.opaque,
             child: Container(
+              decoration: const BoxDecoration(
+                color: secondaryBlack,
+                border: Border(
+                  top: BorderSide(
+                    color: mainGrey,
+                    width: 1.0
+                  )
+                )
+              ),
               padding: const EdgeInsets.symmetric(vertical: 16),
               alignment: Alignment.center,
-              color: secondaryBlack,
               child: Text(
                 '닫기',
                 style: TextStyle(
-                    fontSize: 16,
-                    color: mainWhite,
-                    fontFamily: 'PretendardBold'
+                  fontSize: 16,
+                  color: mainWhite,
+                  fontFamily: 'PretendardBold'
                 ),
               ),
             ),
