@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jamesboard/feature/mission/widget/ButtonRegisterArchivePicture.dart';
 import 'package:jamesboard/feature/mission/widget/EditBoxRegisterMissionArchiveContent.dart';
@@ -59,9 +60,30 @@ class _MissionEditState extends State<MissionEdit> {
     final pickedFile = await picker.pickImage(source: ImageSource.camera);
 
     if (pickedFile != null) {
-      setState(() {
-        _images.add(File(pickedFile.path));
-      });
+      // 1:1로 크롭하기.
+      final croppedFile = await ImageCropper().cropImage(
+        sourcePath: pickedFile.path,
+        aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
+        uiSettings: [
+          AndroidUiSettings(
+            toolbarTitle: '이미지 자르기',
+            toolbarColor: Colors.black,
+            toolbarWidgetColor: Colors.white,
+            hideBottomControls: true, // 하단 컨트롤 숨기기
+            lockAspectRatio: true, // 비율 고정
+          ),
+          IOSUiSettings(
+            minimumAspectRatio: 1.0, // 최소 비율 설정
+            aspectRatioLockEnabled: true, // 비율 고정
+          )
+        ],
+      );
+
+      if (croppedFile != null) {
+        setState(() {
+          _images.add(File(croppedFile.path));
+        });
+      }
     }
   }
 

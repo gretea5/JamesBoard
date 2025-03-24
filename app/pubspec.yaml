@@ -27,6 +27,9 @@ dependencies:
   # 갤러리 이미지
   image_picker: ^1.1.2
 
+  # 이미지 자르기
+  image_cropper: ^9.0.0
+
 
 dev_dependencies:
   flutter_test:
