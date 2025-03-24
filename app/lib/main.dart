@@ -15,15 +15,12 @@ final logger = Logger(
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // 앱 전체에서 세로 모드만 허용
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]).then((_) {
     runApp(MyApp());
   });
-
-  // runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
