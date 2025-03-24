@@ -107,7 +107,7 @@ class ProfileMissionDetail extends StatelessWidget {
                       Navigator.of(context).pop();
 
                       Future.delayed(const Duration(milliseconds: 100), () {
-                        showDialogMissionDetailDelete(
+                        showCustomDialogMissionDetailDelete(
                             context, mainMessage, subMessage);
                       });
                     },
