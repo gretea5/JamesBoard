@@ -37,6 +37,14 @@ class _MissionEditState extends State<MissionEdit> {
 
   // 이미지 선택
   Future<void> _pickImage() async {
+    if (_images.length >= 9) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('최대 9장의 사진만 업로드할 수 있습니다.'),
+        duration: Duration(seconds: 2),
+      ));
+      return;
+    }
+
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
@@ -77,6 +85,14 @@ class _MissionEditState extends State<MissionEdit> {
 
   // 카메라 연결
   Future<void> _pickImageFromCamera() async {
+    if (_images.length >= 9) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('최대 9장의 사진만 업로드할 수 있습니다.'),
+        duration: Duration(seconds: 2),
+      ));
+      return;
+    }
+
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.camera);
 
