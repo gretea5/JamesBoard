@@ -19,7 +19,7 @@ class ItemUserArchiveCard extends StatelessWidget {
     return IntrinsicHeight(
       child: Card(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(16),
           side: BorderSide(
             color: mainGrey,
             width: 1
@@ -31,8 +31,8 @@ class ItemUserArchiveCard extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
+                topLeft: Radius.circular(16),
+                topRight: Radius.circular(16),
               ),
               child: Image.asset(
                 'assets/image/item_archieve_photo.jpg',
@@ -42,15 +42,19 @@ class ItemUserArchiveCard extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.only(left: 20, right: 20, top: 16, bottom: 12),
               child: Column(
                 children: [
                   Text(
                     'This is a description for the card. Here you can put some content that explains more about the card.',
-                    style: TextStyle(fontSize: 16, color: mainWhite, fontFamily: 'PretendardMedium'),
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: mainWhite,
+                      fontFamily: 'PretendardMedium'
+                    ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 10),
+                    margin: EdgeInsets.only(top: 16),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
