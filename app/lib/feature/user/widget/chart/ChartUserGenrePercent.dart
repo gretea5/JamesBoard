@@ -34,7 +34,7 @@ class ChartUserGenrePercent extends StatelessWidget {
                             text: 'Total Value\n', // 첫 번째 줄
                             style: TextStyle(
                               color: mainGrey,
-                              fontSize: 10,
+                              fontSize: 20,
                               fontFamily: 'PretendardSemiBold',
                             ),
                           ),
@@ -42,7 +42,7 @@ class ChartUserGenrePercent extends StatelessWidget {
                             text: '75', // 두 번째 줄 (다른 스타일 적용)
                             style: TextStyle(
                               color: mainWhite,
-                              fontSize: 20,
+                              fontSize: 32,
                               fontFamily: 'PretendardBold',
                             ),
                           ),
@@ -58,7 +58,7 @@ class ChartUserGenrePercent extends StatelessWidget {
                     pointColorMapper: (ChartData data, _) => data.color,
                     xValueMapper: (ChartData data, _) => data.x,
                     yValueMapper: (ChartData data, _) => data.y,
-                    innerRadius: '65%',
+                    innerRadius: '70%',
                     strokeColor: mainWhite,
                     strokeWidth: 1,
                   ),
