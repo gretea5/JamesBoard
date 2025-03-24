@@ -21,6 +21,9 @@ dependencies:
   # logger:
   logger: ^2.5.0
 
+  # date_format
+  intl: ^0.18.0
+
 
 dev_dependencies:
   flutter_test:
