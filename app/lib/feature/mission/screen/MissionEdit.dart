@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -50,6 +51,18 @@ class _MissionEditState extends State<MissionEdit> {
     setState(() {
       _images.removeAt(index);
     });
+  }
+
+  // 카메라 연결
+  Future<void> _pickImageFromCamera() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+
+    if (pickedFile != null) {
+      setState(() {
+        _images.add(File(pickedFile.path));
+      });
+    }
   }
 
   // 등록 버튼
@@ -142,6 +155,7 @@ class _MissionEditState extends State<MissionEdit> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      // 갤러리
                       Flexible(
                         child: SizedBox(
                           width: MediaQuery.of(context).size.width * 0.25,
@@ -151,13 +165,16 @@ class _MissionEditState extends State<MissionEdit> {
                           ),
                         ),
                       ),
+
                       SizedBox(width: 12),
+
+                      // 카메라
                       Flexible(
                         child: SizedBox(
                           width: MediaQuery.of(context).size.width * 0.25,
                           child: ButtonRegisterArchivePicture(
                             icon: 'assets/image/ic_camera.svg',
-                            onTap: () {},
+                            onTap: _pickImageFromCamera,
                           ),
                         ),
                       ),
