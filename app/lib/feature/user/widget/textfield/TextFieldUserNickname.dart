@@ -16,10 +16,12 @@ class _TextFieldUserNicknameState extends State<TextFieldUserNickname> {
   Widget build(BuildContext context) {
     return TextField(
       controller: _controller,
+      style: TextStyle(color: mainWhite, fontFamily: 'PretendardSemiBold'),
       decoration: InputDecoration(
         hintText: "닉네임을 입력하세요",
         hintStyle: TextStyle(
-            color: mainGrey
+          fontFamily: 'PretendardSemiBold',
+          color: mainGrey
         ),
         filled: true,
         fillColor: secondaryBlack,
@@ -39,7 +41,7 @@ class _TextFieldUserNicknameState extends State<TextFieldUserNickname> {
           )
           : null,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(4.0), // 둥근 테두리 설정
+          borderRadius: BorderRadius.circular(10.0), // 둥근 테두리 설정
           borderSide: BorderSide.none, // 테두리 색상 없애기
         ),
       ),
