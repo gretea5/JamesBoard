@@ -33,7 +33,7 @@ class _BottomSheetCommonFilterState extends State<BottomSheetCommonFilter> {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: EdgeInsets.symmetric(vertical: 20),
             child: Text(
               'BottomSheet',
               style: TextStyle(
