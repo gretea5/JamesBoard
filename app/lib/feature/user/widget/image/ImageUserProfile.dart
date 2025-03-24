@@ -7,7 +7,7 @@ class ImageUserProfile extends StatelessWidget {
 
   const ImageUserProfile({
     super.key,
-    this.imageSize = 80,
+    this.imageSize = 120,
   });
 
   @override
@@ -23,14 +23,14 @@ class ImageUserProfile extends StatelessWidget {
           right: 0,
           bottom: 0,
           child: Container(
-            width: 24,
-            height: 24,
+            width: 30,
+            height: 30,
             decoration: BoxDecoration(
               color: secondaryBlack,
               shape: BoxShape.circle,
             ),
             child: Padding(
-              padding: EdgeInsets.all(4), 
+              padding: EdgeInsets.all(6),
               child: SvgPicture.asset(
                 'assets/image/icon_pen.svg',
                 width: 24,
