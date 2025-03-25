@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import '../../../theme/Colors.dart';
 import '../../../widget/image/ImageCommonGameCard.dart';
 
-class HorizontalGameList extends StatelessWidget {
+class ListHomeHorizontalGame extends StatelessWidget {
   final List<String> imageUrls; // 게임 이미지 URL 리스트
   final String title; // 섹션 제목
 
-  const HorizontalGameList({
+  const ListHomeHorizontalGame({
     Key? key,
     required this.imageUrls,
     required this.title,
