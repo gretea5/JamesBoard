@@ -35,4 +35,10 @@ public class ArchiveController {
     public ResponseEntity<Long> getArchiveTest(@RequestBody ArchiveRequestDto archiveRequestDto) {
         return ResponseEntity.ok(archiveService.createArchive(archiveRequestDto));
     }
+
+    @PatchMapping("/{archiveId}")
+    @Operation(summary = "아카이브 수정")
+    public ResponseEntity<Long> updateArchive(@PathVariable Long archiveId, @RequestBody ArchiveRequestDto archiveRequestDto) {
+        return ResponseEntity.ok(archiveService.updateArchive(archiveId, archiveRequestDto));
+    }
 }
