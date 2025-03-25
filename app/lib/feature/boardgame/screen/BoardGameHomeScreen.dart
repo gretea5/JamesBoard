@@ -1,6 +1,7 @@
    import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:jamesboard/feature/boardgame/widget/HorizontalGameList.dart';
+import 'package:jamesboard/feature/boardgame/widget/ListHomeHorizontalGame.dart';
+import 'package:jamesboard/feature/boardgame/widget/ListTopTenGame.dart';
 import 'package:jamesboard/theme/Colors.dart';
 import 'package:jamesboard/widget/image/ImageCommonGameCard.dart';
 
@@ -42,7 +43,7 @@ class _BoardGameHomeScreenState extends State<BoardGameHomeScreen> {
     'https://cf.geekdo-images.com/5CFwjd8zTcGYVUnkXh04hw__original/img/N8btACZrnEYK1amBNk26VBdcGwc=/0x0/filters:format(jpeg)/pic1176894.jpg',
   ];
 
-  final List<String> titles = [
+  final List<String> genreTitles = [
     "파티 : 요원들의 은밀한 모임!",
     "전략 : 첩보 전략의 결정판!",
     "경제 : 부의 흐름을 추적하라!",
@@ -52,6 +53,13 @@ class _BoardGameHomeScreenState extends State<BoardGameHomeScreen> {
     "추리 : 단서로 배신자를 밝혀라!",
     "전쟁 : 긴장 속 최후의 승자!",
     "추상전략 : 냉철한 전략으로 승부!"
+  ];
+
+  final List<String> numOfPersonTitles = [
+    "Solo Mission : 1명",
+    "Duo Mission : 2명",
+    "Team Mission : 3 ~ 4명",
+    "Assemble Mission : 5인 이상",
   ];
 
   // 이미지 클릭 시 수행할 작업
@@ -80,8 +88,15 @@ class _BoardGameHomeScreenState extends State<BoardGameHomeScreen> {
               onImageTap: onImageTap, // 이미지 클릭 시 실행할 함수 전달
             ),
           ),
-          ...titles.map((title) {
-            return HorizontalGameList(
+          ...genreTitles.map((title) {
+            return ListHomeHorizontalGame(
+              imageUrls: makeImageUrlOrder(),  // 섞인 이미지 URL 리스트
+              title: title,  // 각 제목을 전달
+            );
+          }),
+          ListTopTenGame(imageUrls: imageUrls, title: "에이전트 극찬 주요 게임"),
+          ...numOfPersonTitles.map((title) {
+            return ListHomeHorizontalGame(
               imageUrls: makeImageUrlOrder(),  // 섞인 이미지 URL 리스트
               title: title,  // 각 제목을 전달
             );
