@@ -1,5 +1,6 @@
    import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:jamesboard/feature/boardgame/widget/ListBGGRankGame.dart';
 import 'package:jamesboard/feature/boardgame/widget/ListHomeHorizontalGame.dart';
 import 'package:jamesboard/feature/boardgame/widget/ListTopTenGame.dart';
 import 'package:jamesboard/theme/Colors.dart';
@@ -62,6 +63,12 @@ class _BoardGameHomeScreenState extends State<BoardGameHomeScreen> {
     "Assemble Mission : 5인 이상",
   ];
 
+  final List<String> missionLevelTitles = [
+    "임무 난이도 : 초급",
+    "임무 난이도 : 중급",
+    "임무 난이도 : 고급",
+  ];
+
   // 이미지 클릭 시 수행할 작업
   void onImageTap(String id) {
     // id로 수행할 작업을 여기에 작성
@@ -101,6 +108,14 @@ class _BoardGameHomeScreenState extends State<BoardGameHomeScreen> {
               title: title,  // 각 제목을 전달
             );
           }),
+          ListBGGRankGame(imageUrls: imageUrls, title: "BGG 랭크"),
+          ...missionLevelTitles.map((title) {
+            return ListHomeHorizontalGame(
+              imageUrls: makeImageUrlOrder(),  // 섞인 이미지 URL 리스트
+              title: title,  // 각 제목을 전달
+            );
+          }),
+          SizedBox(height: 20)
         ],
       ),
     );
