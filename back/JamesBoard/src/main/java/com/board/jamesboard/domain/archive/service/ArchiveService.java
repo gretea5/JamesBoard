@@ -12,4 +12,6 @@ public interface ArchiveService {
     ArchiveDetailResponseDto getArchiveDetail(Long archiveId);
 
     Long createArchive(ArchiveRequestDto archiveRequestDto);
+
+    Long updateArchive(Long archiveId, ArchiveRequestDto archiveRequestDto);
 }

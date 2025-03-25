@@ -1,5 +1,6 @@
 package com.board.jamesboard.db.entity;
 
+import com.board.jamesboard.domain.archive.dto.ArchiveRequestDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -52,4 +53,12 @@ public class Archive {
     //Archive 삭제시 image도 삭제되어야한다.
     @OneToMany(mappedBy = "archive", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ArchiveImage> archiveImages = new ArrayList<>();
+
+    public void updateArchive(String content, Integer archiveGamePlayTime, Integer archiveGamePlayCount, Game game) {
+        this.archiveContent = content;
+        this.archiveGamePlayTime = archiveGamePlayTime;
+        this.archiveGamePlayCount = archiveGamePlayCount;
+        this.game = game;
+    }
+
 }

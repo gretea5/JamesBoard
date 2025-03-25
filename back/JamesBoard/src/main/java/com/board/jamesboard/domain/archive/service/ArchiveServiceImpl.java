@@ -137,12 +137,9 @@ public class ArchiveServiceImpl implements ArchiveService {
 
         userActivityRepository.findByUserAndGame(user, game)
                 .ifPresentOrElse(
-                        existing -> {
-                            UserActivity updated = existing.toBuilder()
-                                    .userActivityTime(existing.getUserActivityTime() + playTime)
-                                    .modifiedAt(now)
-                                    .build();
-                            userActivityRepository.save(updated);
+                        activity -> {
+                            activity.addPlayTime(playTime);
+                            userActivityRepository.save(activity);
                         },
                         () -> {
                             UserActivity newActivity = UserActivity.builder()
@@ -158,6 +155,72 @@ public class ArchiveServiceImpl implements ArchiveService {
                 );
 
         return savedArchive.getArchiveId();
+    }
+
+    @Override
+    public Long updateArchive(Long archiveId, ArchiveRequestDto archiveRequestDto) {
+
+        Archive archive = archiveRepository.findByArchiveId(archiveId);
+
+        Game newGame = gameRepository.findById(archiveRequestDto.getGameId())
+                .orElseThrow(() -> new RuntimeException("해당 게임이 존재하지 않습니다."));
+
+        User user = archive.getUser(); // 현재 아카이브 작성자
+
+        Game oldGame = archive.getGame();
+        int oldPlayTime = archive.getArchiveGamePlayTime();
+        int newPlayTime = archiveRequestDto.getArchiveGamePlayTime();
+        Instant now = Instant.now();
+
+        userActivityRepository.findByUserAndGame(user, oldGame)
+                .ifPresent(activity -> {
+                    activity.subtractPlayTime(oldPlayTime);
+                    userActivityRepository.save(activity);
+                });
+
+        userActivityRepository.findByUserAndGame(user, newGame)
+                .ifPresentOrElse(
+                        activity -> {
+                            activity.addPlayTime(newPlayTime);
+                            userActivityRepository.save(activity);
+                        },
+                        () -> {
+                            UserActivity newActivity = UserActivity.builder()
+                                    .user(user)
+                                    .game(newGame)
+                                    .userActivityTime(newPlayTime)
+                                    .userActivityRating(null)
+                                    .createdAt(now)
+                                    .modifiedAt(now)
+                                    .build();
+                            userActivityRepository.save(newActivity);
+                        }
+                );
+
+        // 먼저 등록된 이미지들 모두 삭제
+        archiveImageRepository.deleteArchiveImageByArchive(archive);
+
+        // DTO 포함된 이미지 등록
+        List<ArchiveImageDto> requestImageList = archiveRequestDto.getArchiveImageList();
+
+        List<ArchiveImage> archiveImages = requestImageList.stream()
+                .map(images -> ArchiveImage.builder()
+                        .archiveImageUrl(images.getArchiveImageUrl())
+                        .archive(archive)
+                        .build())
+                .toList();
+
+        archiveImageRepository.saveAll(archiveImages);
+
+        // 아카이브 내용 업데이트
+        archive.updateArchive(
+                archiveRequestDto.getArchiveContent(),
+                archiveRequestDto.getArchiveGamePlayTime(),
+                archiveRequestDto.getArchiveGamePlayCount(),
+                newGame
+        );
+
+        return archive.getArchiveId();
     }
 
 }

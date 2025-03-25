@@ -11,4 +11,6 @@ public interface ArchiveImageRepository extends JpaRepository<ArchiveImage, Long
     List<ArchiveImage> findAllByArchiveIn(List<Archive> archive);
 
     List<ArchiveImage> findByArchive(Archive archive);
+
+    void deleteArchiveImageByArchive(Archive archive);
 }
