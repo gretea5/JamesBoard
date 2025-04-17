@@ -14,7 +14,7 @@
 </div>
 
 <div align="center">
-  사용자 데이터 기반 빅데이터 추천 서비스
+  사용자 맞춤형 빅데이터 추천 서비스
 </div>
 
 <div align="center">
